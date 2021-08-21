@@ -8,7 +8,6 @@ use App\Models\transaction;
 use App\Models\User;
 
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Billable;
