@@ -55,7 +55,7 @@
                         <div class="social-box">
                             <a href="#" class="social-login w-inline-block"><img src={{ asset('images/G.png') }} alt=""
                                     class="image-96">
-                                <div class="div-block-2">
+                             <div class="div-block-2">
                                     <div class="text-block-9"> Se connecter via Google</div>
                                 </div>
                             </a>

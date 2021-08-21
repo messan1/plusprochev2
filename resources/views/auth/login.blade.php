@@ -53,12 +53,13 @@
                 </p>
             @enderror
             <div class="w-form">
-                <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form">
+                <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form" method="POST"
+                action="{{ route('login') }}">
                     @csrf
                     <div class="form-field-wrapper">
                         <div id="w-node-e498b37c-6fcd-38bc-4005-9c759db9f610-0bf06067"><label for="Email-4"
                                 id="contact-email">Email *</label><input type="email" class="w-input" maxlength="256"
-                                name="Email-3" data-name="Email 3" id="Email-3" required=""></div>
+                                name="email" data-name="Email 3" id="Email-3" required=""></div>
                         <div id="w-node-e498b37c-6fcd-38bc-4005-9c759db9f614-0bf06067"><label
                                 for="Contact-Phone-Number-3" id="contact-phone">Mot de passe *</label><input type="password"
                                 class="w-input" maxlength="256" name="password"
