@@ -75,7 +75,7 @@ class offerController extends Controller
             $offer["courrier_unit_cost"] = $input["courrier_unit_cost"];
             $offer["courrier_quantity"] = $input["courrier_quantity"];
             $offer["user_id"] = 1;
-            $offer["code"] = 0;
+            $offer["code"] = refCode(env('PP_PREFIX_OFFER'), 0);
 
 
             $trajet = new trajet();
