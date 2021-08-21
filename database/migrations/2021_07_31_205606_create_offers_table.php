@@ -13,15 +13,12 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
+    
         Schema::create('offers', function (Blueprint $table) {
 
             $table->increments("id");
 
-            $table->double("quantity_kg")->notNull()->defaultValue(0);
-
-            $table->double("price_kg")->defaultValue(0);
-
-
+    
             $table->foreignId("user_id")->nullable()->constrained('users')->onDelete("cascade");
             $table->foreignId("trajet_id")->nullable();
 
@@ -36,6 +33,8 @@ class CreateOffersTable extends Migration
 
             $table->boolean("has_courrier")->notNull()->defaultValue(false);
             $table->double("courrier_unit_cost")->defaultValue(0);
+            $table->double("courrier_quantity")->notNull()->defaultValue(0);
+
 
             $table->enum("status", ['EN COURS', 'TERMINE','SUSPENDU']);
             $table->text("delivery_condition");
@@ -45,6 +44,9 @@ class CreateOffersTable extends Migration
             $table->timestamps();
 
         });
+
+
+
     }
 
     /**
