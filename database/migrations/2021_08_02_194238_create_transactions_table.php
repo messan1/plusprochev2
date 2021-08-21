@@ -17,9 +17,9 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
 
             $table->id();
-            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
-            $table->foreignId("offer_id")->constrained("offers");
-            $table->foreignId("payment_id")->constrained("payments");
+            $table->foreignId("user_id")->nullable()->constrained("users")->onDelete("cascade");
+            $table->foreignId("offer_id")->nullable();
+            $table->foreignId("payment_id")->nullable();
 
             $table->string("code")->unique();
             $table->string("currency")->notNull()->defaultValue("EUR");

@@ -21,8 +21,9 @@ class CreateOffersTable extends Migration
 
             $table->double("price_kg")->defaultValue(0);
 
-            $table->foreignId("user_id")->constrained('users')->onDelete("cascade");
-            $table->foreignId("trajet_id")->constrained('trajet')->onDelete("cascade");
+
+            $table->foreignId("user_id")->nullable()->constrained('users')->onDelete("cascade");
+            $table->foreignId("trajet_id")->nullable();
 
             $table->string("code")->unique();
             $table->string("currency")->notNull()->defaultValue("EUR");

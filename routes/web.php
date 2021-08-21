@@ -30,7 +30,7 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get("howitworks",[NavigationController::class,"howitworks"]);
 Route::get("publishoffer",[NavigationController::class,"publishoffer"]);
 Route::get("contactus",[NavigationController::class,"contactus"]);
-Route::get("publishoffer",[NavigationController::class,"publishoffer"]);
+Route::get("orderoffer",[NavigationController::class,"orderoffer"]);
 Route::get("myoffers",[NavigationController::class,"myoffers"]);
 Route::get("mybuyings",[NavigationController::class,"mybuyings"]);
 Route::get("profile",[NavigationController::class,"profile"]);

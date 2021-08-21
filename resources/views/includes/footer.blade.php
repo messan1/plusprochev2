@@ -1,8 +1,6 @@
-<!-- Footer-->
-
 <footer id="footer" class="footer-2 foot-2 wf-section">
     <div class="w-row">
-      <div class="w-col w-col-2"><img src={{asset("images/logo-transparent.png")}} loading="lazy" width="72" sizes="(max-width: 479px) 100vw, (max-width: 767px) 92vw, (max-width: 991px) 14vw, (max-width: 1439px) 15vw, 16vw" srcset="../images/logo-transparent-p-500.png 500w, ../images/logo-transparent-p-800.png 800w, ../images/logo-transparent-p-1080.png 1080w, ../images/logo-transparent-p-1600.png 1600w, ../images/logo-transparent.png 1890w" alt="" class="avatar avatar-readonly"></div>
+      <div class="w-col w-col-2"><img src="../images/logo-transparent.png" loading="lazy" width="72" sizes="(max-width: 479px) 100vw, (max-width: 767px) 92vw, (max-width: 991px) 14vw, (max-width: 1439px) 15vw, 16vw" srcset="../images/logo-transparent-p-500.png 500w, ../images/logo-transparent-p-800.png 800w, ../images/logo-transparent-p-1080.png 1080w, ../images/logo-transparent-p-1600.png 1600w, ../images/logo-transparent.png 1890w" alt="" class="avatar avatar-readonly"></div>
       <div class="w-col w-col-5">
         <div class="div-block-105"></div>
         <div>
@@ -55,4 +53,3 @@
       </div>
     </div>
   </footer>
-<!-- Footer-->
