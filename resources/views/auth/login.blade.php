@@ -68,7 +68,7 @@
                     <div class="div-block-109">
                         <div id="formInstructions" class="small-text"><em>Les champs marqués avec un astérisque (*) sont
                                 requis.</em></div>
-                        <a href="#" class="link-login">Mot de passe oublié ?</a>
+                        <a href="{{ route('password.request')}}" class="link-login">Mot de passe oublié ?</a>
                     </div>
                     @if (Route::has('register'))
                     <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
