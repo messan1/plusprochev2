@@ -6,6 +6,9 @@ use App\Models\Offer;
 use App\Models\trajet;
 use App\Models\transaction;
 use App\Models\User;
+
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Billable;
@@ -13,7 +16,6 @@ use Laravel\Cashier\Billable;
 class offerController extends Controller
 {
     //During creation:
-    //code = refCode(env(PP_PREFIX_OFFER, 'OFR'), $offer->id);
     //colis_ttc = this->colis_unit_cost * env("PP_COLIS_FEE");
     //courrier_ttc = $this->courrier_unit_cost * env("PP_COURRIER_FEE");
 
@@ -22,7 +24,7 @@ class offerController extends Controller
 
         $offers = Offer::latest()->paginate($pagination);
 
-        return view('offers.index', compact('offers'))
+        return view('page.MyOffer', compact('offers'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -35,54 +37,116 @@ class offerController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            "quantity_kg" => "required",
-            "fly_proof" => "required",
-            "price_kg" => "required",
-            "date_arrivee" => "required",
-            "status" => "required",
-            "provenance" => "required",
-            "destination" => "required",
-        ]);
-
-
+       // dd($request);
 
         $input = $request->all();
-        //dd($input["price_kg"]);
+
+        if( isset($input["has_courrier"]) && $input["has_courrier"]=="on"){
 
 
-        if ($image = $request->file('fly_proof')) {
-            $destinationPath = 'fly_proof/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['fly_proof'] = "$profileImage";
+            $request->validate([
+                "depart" => "required",
+                "destination" => "required",
+                "arrived_at" => "required",
+                "delivery_address" => "required",
+
+                "courrier_quantity" => "required",
+                "courrier_unit_cost" => "required",
+            ]);
+
+
+
+            //dd($input["price_kg"]);
+
+
+            if ($image = $request->file('plane_ticket')) {
+                $destinationPath = 'plane_ticket/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $input['plane_ticket'] = "$profileImage";
+            }
+
+
+
+
+
+            $offer = new Offer();
+            $offer["delivery_condition"] = $input["delivery_condition"];
+            $offer["courrier_unit_cost"] = $input["courrier_unit_cost"];
+            $offer["courrier_quantity"] = $input["courrier_quantity"];
+            $offer["user_id"] = 1;
+            $offer["code"] = 0;
+
+
+            $trajet = new trajet();
+            $trajet["depart"] = $input["depart"];
+            $trajet["destination"] = $input["destination"];
+            $trajet["arrived_at"] = $input["arrived_at"];
+            $trajet["plane_ticket"] = $input["plane_ticket"];
+
+
+            $trajet->save();
+
+            $offer->user()->associate(Auth::user());
+            $offer->trajet()->associate($trajet);
+
+            $offer->save();
+        }
+
+        if( isset($input["has_colis"]) &&  $input["has_colis"]=="on"){
+
+            $request->validate([
+                "depart" => "required",
+                "destination" => "required",
+                "arrived_at" => "required",
+                "delivery_address" => "required",
+                "has_colis" => "required",
+                "colis_quantity" => "required",
+                "colis_unit_cost" => "required",
+                "delivery_condition" => "required",
+
+            ]);
+
+
+
+            //dd($input["price_kg"]);
+
+
+            if ($image = $request->file('plane_ticket')) {
+                $destinationPath = 'plane_ticket/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $input['plane_ticket'] = "$profileImage";
+            }
+
+
+
+            $offer = new Offer();
+            $offer["colis_quantity"] = $input["colis_quantity"];
+            $offer["colis_unit_cost"] = $input["colis_unit_cost"];
+            $offer["delivery_condition"] = $input["delivery_condition"];
+            $offer["user_id"] = 1;
+
+
+            $trajet = new trajet();
+            $trajet["depart"] = $input["depart"];
+            $trajet["destination"] = $input["destination"];
+            $trajet["arrived_at"] = $input["arrived_at"];
+            $trajet["plane_ticket"] = $input["plane_ticket"];
+
+
+            $trajet->save();
+
+            $offer->user()->associate(Auth::user());
+            $offer->trajet()->associate($trajet);
+
+            $offer->save();
         }
 
 
 
-        $offer = new Offer();
-        $offer["quantity_kg"] = $input["quantity_kg"];
-        $offer["price_kg"] = $input["price_kg"];
-        $offer["status"] = $input["status"];
-        $offer["user_id"] = 1;
 
 
-        $trajet = new trajet();
-        $trajet["depart"] = $input["provenance"];
-        $trajet["arrivee"] = $input["destination"];
-        $trajet["date_arrivee"] = $input["date_arrivee"];
-        $trajet["billet_avion"] = $input["fly_proof"];
-
-
-        $trajet->save();
-
-        $offer->user()->associate(Auth::user());
-        $offer->trajet()->associate($trajet);
-
-        $offer->save();
-
-
-        //dd($input);
 
 
         return redirect()->route('offers.index')
@@ -94,7 +158,7 @@ class offerController extends Controller
     {
 
         $request->validate([
-            "provenance" => "required",
+            "depart" => "required",
             "destination" => "required",
         ]);
 
@@ -102,13 +166,13 @@ class offerController extends Controller
 
         $offers = Offer::whereHas('trajet', function ($query) use ($input) {
             $query->where('arrivee', $input["destination"]);
-            $query->where('depart', $input["provenance"]);
+            $query->where('depart', $input["depart"]);
         })->with('trajet')->with('user')->get();
 
 
 
         return view('offers.sell', compact('offers'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -123,12 +187,14 @@ class offerController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         return view('offers.details', ['offer' => Offer::findOrFail($id)]);
     }
 
 
-    public function pay(Request $request){
+    public function pay(Request $request)
+    {
 
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -157,12 +223,13 @@ class offerController extends Controller
         return redirect()->route('testimonial.add')->with('success', 'Votre à été payé avec success');
 
 
-       // dd($transaction->offer);
+        // dd($transaction->offer);
 
     }
 
 
-    public function offer_already_paid($pagination = 20){
+    public function offer_already_paid($pagination = 20)
+    {
 
         $transactions = transaction::whereHas('user', function ($query) {
             $query->where('id',  Auth::user()->id);
@@ -175,18 +242,19 @@ class offerController extends Controller
         //dd($offers);
     }
 
-    public function show_payment_gate($id=1)
+    public function show_payment_gate($id = 1)
 
     {
 
 
-       //$intent = auth()->user()->createOrGetStripeCustomer();
-      // $intent = 4;
+        //$intent = auth()->user()->createOrGetStripeCustomer();
+        // $intent = 4;
 
-        return view('offers.payement_gate', compact('id','intent'));
+        return view('offers.payement_gate', compact('id', 'intent'));
     }
 
-    public function validate_payment(Request $request){
+    public function validate_payment(Request $request)
+    {
         $user          = $request->user();
         $paymentMethod = $request->input('payment_method');
 

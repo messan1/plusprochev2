@@ -13,16 +13,16 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-    
+
         Schema::create('offers', function (Blueprint $table) {
 
             $table->increments("id");
 
-    
+
             $table->foreignId("user_id")->nullable()->constrained('users')->onDelete("cascade");
             $table->foreignId("trajet_id")->nullable();
 
-            $table->string("code")->unique();
+            $table->string("code")->nullable();
             $table->string("currency")->notNull()->defaultValue("EUR");
             $table->double("ratio_eur")->notNull()->defaultValue(1);
 
@@ -37,7 +37,7 @@ class CreateOffersTable extends Migration
 
 
             $table->enum("status", ['EN COURS', 'TERMINE','SUSPENDU']);
-            $table->text("delivery_condition");
+            $table->text("delivery_condition")->nullable();
             $table->text("delivery_address");
 
             $table->timestamp("published_at");
