@@ -27,7 +27,7 @@
     <h1 class="heading-1 _850-width centre">Mon profil</h1>
     <div class="container-10 w-container">
       <div class="div-block-103"><img src="../images/avatar-1_1avatar-1.png" loading="lazy" width="72" alt="" class="avatar avatar-readonly">
-        <div class="text-block-16">Ben Horo</div>
+        <div class="text-block-16">infinity</div>
         <div class="text-block-16">Email</div>
         <div class="text-block-16">Numéro de téléphone</div>
         <a href="#">Fichier d&#x27;identité</a>
