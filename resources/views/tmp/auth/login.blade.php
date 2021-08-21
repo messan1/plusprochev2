@@ -1,7 +1,6 @@
 @extends("layouts.layout")
 
 @section('content')
-
     <section class="section pricing-hero section-offers section-publish wf-section">
         <h1 class="heading-1 _850-width centre">Se connecter</h1>
         <div class="w-container">

@@ -4,7 +4,7 @@
                 src={{ asset('images/logo-transparent.png') }} loading="lazy" height="" sizes="120.03125px"
                 srcset="../images/logo-transparent-p-500.png 500w, ../images/logo-transparent-p-800.png 800w, ../images/logo-transparent-p-1080.png 1080w, ../images/logo-transparent-p-1600.png 1600w, ../images/logo-transparent.png 1890w"
                 alt="" class="nav-logo"></a>
-      <div class="div-block-106"></div>
+        <div class="div-block-106"></div>
 
         <nav role="navigation" class="nav-menu-2 w-nav-menu">
 
@@ -28,7 +28,7 @@
                         <a href="{{ url('/mybuyings') }}" class="nav-link-4 w-dropdown-link">Mes achats</a>
                         <a href="{{ url('/profile') }}" class="nav-link-4 w-dropdown-link">Mon profils</a>
                         <a href="{{ route('logout') }}" class="nav-link-4 w-dropdown-link" onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">Se deconnecter</a>
+                                     document.getElementById('logout-form').submit();">Se deconnecter</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             {{ csrf_field() }}
                         </form>
@@ -70,10 +70,10 @@
                     <a href="{{ url('/mybuyings') }}" class="w-dropdown-link">Mes achats</a>
                     <a href="{{ url('/profile') }}" class="w-dropdown-link">Mon profil</a>
                     <a href="{{ route('logout') }}" class="nav-link-4 w-dropdown-link" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">Se deconnecter</a>
-           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-               {{ csrf_field() }}
-           </form>
+                        document.getElementById('logout-form').submit();">Se deconnecter</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        {{ csrf_field() }}
+                    </form>
                 </nav>
 
             </div>
@@ -91,5 +91,3 @@
         </div>
     </div>
 </div>
-
-
