@@ -11,7 +11,10 @@
 
 
         <!-- Offers Bar -->
-        @include('includes.recentsOffers')
+        @include('includes.recentsOffers', [
+            'recentoffers1' => [],
+            'recentoffers2' => []
+        ])
 
         <!-- End Offers Bar -->
 

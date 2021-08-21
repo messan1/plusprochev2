@@ -8,6 +8,17 @@ function refCode($prefix, $id) {
     return privateGenerator($prefix, $id, 2, 3);
 }
 
+function changeStr($from, $to, $amount, $date) {
+    $value = round( change($from, $to, $amount, $date), 2 );
+    $currencyArray = array(
+        'EUR' => '€',
+        'USD' => '$',
+        'XOF' => 'FCFA'
+    );
+    $toStr = $currencyArray[ Str::upper($to) ];
+    return "$value $toStr";
+}
+
 //change($model->currency, $cookie->currency, $amount)
 
 function change($from, $to, $amount, $date) {

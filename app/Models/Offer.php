@@ -40,4 +40,26 @@ class Offer extends Model
     {
         return change($this->currency, 'EUR', 1, $this->published_at);
     }
+
+    public function colisQuantityFree() {
+        $quantity_all = $this->colis_quantity;
+        $quantity_used = $this->transactions()->all()->map->colis_quantity();
+        return $quantity_all - $quantity_used;
+    }
+
+    public function courrierQuantityFree() {
+        $quantity_all = $this->courrier_quantity;
+        $quantity_used = $this->transactions()->all()->map->courrier_quantity();
+        return $quantity_all - $quantity_used;
+    }
+
+    public function isOpened() {
+        return $this->status == "EN COURS";
+    }
+    public function isClosed() {
+        return $this->status == "TERMINE";
+    }
+    public function isCanceled() {
+        return $this->status == "SUSPENDU";
+    }
 }

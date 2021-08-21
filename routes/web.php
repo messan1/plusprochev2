@@ -3,6 +3,7 @@
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\TypeaheadController;
 use App\Http\Controllers\offerController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,7 +24,16 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+/*
+Route::post('/locale', function ($request) {
+    $locale = $request->locale;
+    if (! in_array($locale, ['en', 'fr'])) {
+        abort(400);
+    }
+    App::setLocale($locale);
 
+});
+*/
 
 
 Auth::routes(['verify' => true]);
@@ -41,7 +51,6 @@ Route::get("mybuyings",[NavigationController::class,"mybuyings"]);
 Route::get("profile",[NavigationController::class,"profile"]);
 Route::get("searchoffers",[NavigationController::class,"searchoffers"]);
 Route::get("detailsorder",[NavigationController::class,"detailsorder"]);
-
 
 //typesense
 Route::get('/ajax-autocomplete-search', [TypeaheadController::class, 'autocompleteSearch']);

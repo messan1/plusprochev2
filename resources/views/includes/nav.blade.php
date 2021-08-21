@@ -8,12 +8,12 @@
 
         <nav role="navigation" class="nav-menu-2 w-nav-menu">
 
-            <a href="{{ url('/howitworks') }}" class="nav-link-4 w-nav-link">Comment ça marche</a>
-            <a href="{{ url('/publishoffer') }}" class="nav-link-4 w-nav-link">Publier une offre</a>
-            <a href="{{ url('/contactus') }}" class="nav-link-4 w-nav-link">Nous Contacter</a>
+            <a href="{{ url('/howitworks') }}" class="nav-link-4 w-nav-link">{{ __('home.navbar.how') }}</a>
+            <a href="{{ url('/publishoffer') }}" class="nav-link-4 w-nav-link">{{ __('home.navbar.post') }}</a>
+            <a href="{{ url('/contactus') }}" class="nav-link-4 w-nav-link">{{ __('home.navbar.contact') }}</a>
             @guest
-                <a href="{{ url('/login') }}" class="nav-link-4 hide w-nav-link">Se Connecter</a>
-
+                <a href="{{ url('/login') }}" class="nav-link-4 hide w-nav-link">{{ __('home.navbar.signin') }}</a>
+                <a href="{{ url('/signup') }}" class="nav-link-4 hide w-nav-link">{{ __('home.navbar.signup') }}</a>
             @endguest
 
             @auth
@@ -23,12 +23,12 @@
                         <div>Mon Compte</div>
                     </div>
                     <nav class="dropdown-list-4 w-dropdown-list">
-                        <a href="{{ url('/publishoffer') }}" class="nav-link-4 w-dropdown-link">Publier une offre</a>
-                        <a href="{{ url('/myoffers') }}" class="nav-link-4 w-dropdown-link">Mes offres</a>
-                        <a href="{{ url('/mybuyings') }}" class="nav-link-4 w-dropdown-link">Mes achats</a>
-                        <a href="{{ url('/profile') }}" class="nav-link-4 w-dropdown-link">Mon profils</a>
+                        <a href="{{ url('/publishoffer') }}" class="nav-link-4 w-dropdown-link">{{ __('home.navbar.post') }}</a>
+                        <a href="{{ url('/myoffers') }}" class="nav-link-4 w-dropdown-link">{{ __('home.navbar.my_offers') }}</a>
+                        <a href="{{ url('/mybuyings') }}" class="nav-link-4 w-dropdown-link">{{ __('home.navbar.my_buyings') }}</a>
+                        <a href="{{ url('/profile') }}" class="nav-link-4 w-dropdown-link">{{ __('home.navbar.profile') }}</a>
                         <a href="{{ route('logout') }}" class="nav-link-4 w-dropdown-link" onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">Se deconnecter</a>
+                                     document.getElementById('logout-form').submit();">{{ __('home.navbar.logout') }}</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             {{ csrf_field() }}
                         </form>
@@ -53,8 +53,8 @@
                 data-default-duration="2" data-duration="0" class="hamburger"></div>
         </div>
         @guest
-            <a href="{{ url('/login') }}" class="nav-btn w-button">Se connecter</a>
-
+            <a href="{{ url('/login') }}" class="nav-btn w-button">{{ __('home.navbar.signin') }}</a>
+            <a href="{{ url('/signup') }}" class="nav-btn w-button">{{ __('home.navbar.signup') }}</a>
         @endguest
 
         @auth
@@ -65,12 +65,12 @@
                 </div>
 
                 <nav class="dropdown-list-3 w-dropdown-list">
-                    <a href="{{ url('/publishoffer') }}" class="w-dropdown-link">Publier une offre</a>
-                    <a href="{{ url('/myoffers') }}" class="w-dropdown-link">Mes offres</a>
-                    <a href="{{ url('/mybuyings') }}" class="w-dropdown-link">Mes achats</a>
-                    <a href="{{ url('/profile') }}" class="w-dropdown-link">Mon profil</a>
+                    <a href="{{ url('/publishoffer') }}" class="w-dropdown-link">{{ __('home.navbar.post') }}</a>
+                    <a href="{{ url('/myoffers') }}" class="w-dropdown-link">{{ __('home.navbar.my_offers') }}</a>
+                    <a href="{{ url('/mybuyings') }}" class="w-dropdown-link">{{ __('home.navbar.my_buyings') }}</a>
+                    <a href="{{ url('/profile') }}" class="w-dropdown-link">{{ __('home.navbar.profile') }}</a>
                     <a href="{{ route('logout') }}" class="nav-link-4 w-dropdown-link" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">Se deconnecter</a>
+                        document.getElementById('logout-form').submit();">{{ __('home.navbar.logout') }}</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         {{ csrf_field() }}
                     </form>
@@ -78,15 +78,32 @@
 
             </div>
         @endauth
+        {{-- <form id="locale-form" action="{{ url('/locale') }}" method="POST">
+            {{ csrf_field() }}
+            <select class="form-control" id="locale-select" name="locale" onchange="event.preventDefault(); document.getElementById('locale-form').submit();">
+                <option value="fr" selected>Français</option>
+                <option value="en">Anglais</option>
+            </select>
+        </form> --}}
+        <div data-hover="" data-delay="0" class="dropdown-4 w-dropdown">
+            <div class="nav-btn nav-dropdown w-dropdown-toggle">
+                <div class="icon-6 w-icon-dropdown-toggle"></div>
+                <div>Français</div>
+            </div>
+            <nav class="dropdown-list-3 w-dropdown-list">
+                <a href="#" class="w-dropdown-link">Anglais</a>
+                <a href="#" class="w-dropdown-link">Français</a>
+            </nav>
+        </div>
         <div data-hover="" data-delay="0" class="dropdown-4 w-dropdown">
             <div class="nav-btn nav-dropdown w-dropdown-toggle">
                 <div class="icon-6 w-icon-dropdown-toggle"></div>
                 <div>EUR (€)</div>
             </div>
             <nav class="dropdown-list-3 w-dropdown-list">
-                <a href="{{ url('/') }}" class="w-dropdown-link">FCFA (XOF)</a>
-                <a href="{{ url('/') }}" class="w-dropdown-link">FCFA (XAF)</a>
-                <a href="{{ url('/') }}" class="w-dropdown-link">USD ($)</a>
+                <a href="#" class="w-dropdown-link">EUR (€)</a>
+                <a href="#" class="w-dropdown-link">FCFA (XOF)</a>
+                <a href="#" class="w-dropdown-link">USD ($)</a>
             </nav>
         </div>
     </div>
