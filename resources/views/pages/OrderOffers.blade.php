@@ -186,11 +186,17 @@
                         <div id="w-node-_52c0d420-680c-18b5-58e9-ebbbb3780d12-edc993e5"><label for="Nom-7"
                                 id="contact-email">Prix total TTC à payer</label><input readonly value=0 type="text" maxlength="256"
                                 name="Nom-6" data-name="Nom 6" id="Nom-6" class="w-input"></div>
+
+                        <x-input id="payment_method" name="payment_method" type="hidden"/>
+                        <div id="w-node-_52c0d420-680c-18b5-58e9-ebbbb3780d12-edc993e5" id="card-element">
+                        </div>
+
+
                     </div><label class="w-checkbox"><input type="checkbox" id="CheckColis-2" name="has_condition"
                             data-name="Check Colis 2" class="w-checkbox-input"><span for="CheckColis-3"
                             class="w-form-label">J&#x27;accepte les conditions générales et la politique de
                             confidentialité</span></label>
-                    <div class="div-block-104"><input type="submit" value="Valider la réservation"
+                    <div class="div-block-104"><input type="submit" value="Valider la réservation" id="submit-button"
                             data-wait="Veuillez patienter..." class="form-btn-submit w-button"></div>
                 </form>
                 <div class="w-form-done">
@@ -208,6 +214,34 @@
     </script>
     <script src="../js/webflow.js" type="text/javascript"></script>
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+
+    <script src="https://js.stripe.com/v3"></script>
+    <script>
+        //alert('ok')
+        const stripe = Stripe(" {{ env('STRIPE_KEY')}} ")
+        const elements = stripe.elements
+        const cardElement = element.create('card', {
+            classes: {
+                base: 'StripeElement bg-white w-1/2 p-2 my-2 rounded-lg'
+            }
+        })
+        cardElement.mount("#card-element")
+
+        const cardButton = document.getElementById('submit-button')
+
+        cardButton.addEventListener('click', async(e) => {
+            e.preventDefault()
+            //cardButton.disabled()
+            const { paymentMethod, error } = await stripe.createPaymentMethod('card', cardElement);
+            if (error) {
+                alert(error)
+            } else {
+                document.getElementById('payment_method').value = paymentMethod.id
+            }
+
+            document.getElementById('wf-form-Contact-Form').submit()
+        });
+    </script>
 </body>
 
 </html>
