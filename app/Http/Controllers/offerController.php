@@ -12,6 +12,11 @@ use Laravel\Cashier\Billable;
 
 class offerController extends Controller
 {
+    //During creation:
+    //code = refCode(env(PP_PREFIX_OFFER, 'OFR'), $offer->id);
+    //colis_ttc = this->colis_unit_cost * env("PP_COLIS_FEE");
+    //courrier_ttc = $this->courrier_unit_cost * env("PP_COURRIER_FEE");
+
     public function index($pagination = 20)
     {
 

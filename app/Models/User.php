@@ -49,4 +49,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function transactions(){
         return $this->hasMany(Transaction::class);
     }
+
+    //
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->last_name}";
+    }
 }
