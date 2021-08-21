@@ -24,4 +24,51 @@ class transaction extends Model
     public function offer(){
         return $this->belongsTo(offer::class);
     }
+
+    //Mutators & Accessors
+    protected $appends = ['ratio_eur', 'total_cost'];
+
+    public function getRatioEurAttribute()
+    {
+        return change($this->currency, 'EUR', 1, $this->published_at);
+    }
+
+    public function getColisCostAttribute() {
+        return $this->has_colis ?
+            $this->colis_quantity * change(
+                $this->offer()->currency,
+                $this->currency,
+                $this->offer()->colis_ttc,
+                $this->order_at
+            ) : 0;
+    }
+
+    public function getCourrierCostAttribute() {
+        return $this->has_courrier ?
+            $this->courrier_quantity * change(
+                $this->offer()->currency,
+                $this->currency,
+                $this->offer()->courrier_ttc,
+                $this->order_at
+            ) : 0;
+    }
+
+    public function getInsuranceCostAttribute() {
+        return $this->has_insurance ?
+            $this->insurance_unit_cost /* * change(
+                $this->offer()->currency,
+                $this->currency,
+                $this->offer()->courrier_ttc,
+                $this->orderet_at
+            )*/ : 0;
+    }
+
+    public function getTotalCostAttribute() {
+        return
+            $this->getColisCostAttribute() +
+            $this->getCourrierCostAttribute() +
+            $this->getInsuranceCostAttribute() +
+            $this->getFraisService();
+    }
+
 }

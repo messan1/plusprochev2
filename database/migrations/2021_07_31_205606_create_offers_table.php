@@ -13,12 +13,12 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-    
+
         Schema::create('offers', function (Blueprint $table) {
 
             $table->increments("id");
 
-    
+
             $table->foreignId("user_id")->nullable()->constrained('users')->onDelete("cascade");
             $table->foreignId("trajet_id")->nullable();
 
@@ -34,6 +34,7 @@ class CreateOffersTable extends Migration
             $table->boolean("has_courrier")->notNull()->defaultValue(false);
             $table->double("courrier_unit_cost")->defaultValue(0);
             $table->double("courrier_quantity")->notNull()->defaultValue(0);
+            $table->double("courrier_ttc")->notNull()->defaultValue(0);
 
 
             $table->enum("status", ['EN COURS', 'TERMINE','SUSPENDU']);

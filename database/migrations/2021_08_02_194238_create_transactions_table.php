@@ -35,8 +35,10 @@ class CreateTransactionsTable extends Migration
 
             $table->boolean("has_insurance")->notNull()->defaultValue(false);
             $table->double("insurance_unit_cost")->defaultValue(0);
+            $table->double("insurance_cost")->defaultValue(0);
 
-            $table->double("total_cost")->defaultValue(0);
+            //$table->double("total_cost")->defaultValue(0);
+            $table->double("frais_service")->defaultValue(0);
 
             $table->enum('status_transaction', ['EN COURS', 'TERMINE','SUSPENDU']);
             $table->enum('status_delivery', ['EN COURS', 'TERMINE','SUSPENDU']);

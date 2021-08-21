@@ -32,4 +32,12 @@ class Offer extends Model
     public function transactions(){
         return $this->hasMany(transaction::class);
     }
+
+    //Mutators & Accessors
+    protected $appends = ['ratio_eur'];
+
+    public function getRatioEurAttribute()
+    {
+        return change($this->currency, 'EUR', 1, $this->published_at);
+    }
 }
