@@ -11,7 +11,8 @@ class trajet extends Model
 
     protected $table = 'trajets';
     protected $primaryKey = 'id';
-
+    protected $fillable = ['depart', 'destination', 'plane_ticket', 'arrived_at'];
+    
     public function offer(){
         return $this->hasOne(Offer::class);
     }

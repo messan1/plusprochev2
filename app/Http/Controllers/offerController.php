@@ -23,9 +23,7 @@ class offerController extends Controller
     {
 
         $offers = Offer::latest()->paginate($pagination);
-
-        return view('page.MyOffer', compact('offers'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('pages.MyOffer', compact('offers'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -34,7 +32,54 @@ class offerController extends Controller
         return view("offers.create");
     }
 
-    public function store(Request $request)
+    public function store(Request $request){
+        if(!isset($request['has_courrier']) && !isset($request['has_colis'])){
+            $sms = "Vous navez pas cochez"; 
+                    return view('pages.PublishOffer')->with('error',$sms);
+        }else{
+            $request->validate([
+                "depart" => "required",
+                "destination" => "required",
+                "arrived_at" => "required",
+                "delivery_address" => "required",
+
+            ]);
+            $dataTrajet = [
+                "depart"=> $request['depart'],
+                "destination"=> $request['destination'],
+                "arrived_at"=> $request['arrived_at'],
+                "plane_ticket"=> $request['plane_ticket']
+            ];
+            $trajet = trajet::create($dataTrajet);
+
+            $dataOffer = [
+                "delivery_address"=> $request['delivery_address'],
+                ];
+            if($request['has_colis']=='on'){
+                $validated = $request->validate([
+                    "colis_quantity" => "required",
+                    "colis_unit_cost" => "required",
+                    "delivery_condition" => "required",
+                ]);
+
+                $dataOffer['colis_quantity'] = $request['colis_quantity'];
+                $dataOffer['colis_unit_cost'] = $request['colis_unit_cost'];
+                $dataOffer['delivery_condition'] = $request['delivery_condition'];
+            };
+            if($request['has_courrier']=='on'){
+                $request->validate([
+                    "courrier_quantity" => "required",
+                    "courrier_unit_cost" => "required",
+                ]);
+                $offer->courrier_quantity = $request['courrier_quantity'];
+                $offer->courrier_unit_cost = $request['courrier_unit_cost'];
+
+            }
+            Offer::create($data);
+            
+        }
+    }
+    public function oldstore(Request $request)
     {
 
        // dd($request);

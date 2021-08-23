@@ -6,6 +6,13 @@
         class="section pricing-hero section-offers section-publish wf-section" action="{{ route('offers.store') }}"
         method="POST" enctype="multipart/form-data">
         @csrf
+        @if (isset($error))
+        <div class="alert alert-danger">
+            <ul>
+                <li>{{ $error }}</li>
+            </ul>
+        </div>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -90,7 +97,7 @@
                                 <label class="w-checkbox"><input type="checkbox" x-model="has_colis" id="CheckColis"
                                         name="has_colis" data-name="CheckColis" class="w-checkbox-input"><span
                                         for="CheckColis" class="w-form-label">Je souhaite effectuer le transport de
-                                        colis</span></label>
+                                        colis</span></label>    
 
 
                                 <div class="form-field-wrapper">

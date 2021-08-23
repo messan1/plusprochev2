@@ -19,20 +19,23 @@
         WebFont.load({
             google: {
                 families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic",
-                    "Roboto:300,regular,500,700,900", "Inder:regular", "Inter:300,regular,500,600,700,800,900",
+                    "Roboto:300,regular,500,700,900", "Inder:regular",
+                    "Inter:300,regular,500,600,700,800,900",
                     "Source Sans Pro:regular"
                 ]
             }
         });
+
     </script>
     <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
     <script type="text/javascript">
-        ! function(o, c) {
+        ! function (o, c) {
             var n = c.documentElement,
                 t = " w-mod-";
             n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n
                 .className += t + "touch")
         }(window, document);
+
     </script>
     <link href="../images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../images/webclip.png" rel="apple-touch-icon">
@@ -62,11 +65,14 @@
                             <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form">
                                 <div class="form-field-wrapper">
                                     <div id="w-node-_7c4238ec-34a1-2227-0577-fe461f0323b8-edc993e5"
-                                        class="div-block-108"><label for="Nom" id="contact-email">Départ *</label><input
-                                            readonly value=0 type="text" maxlength="256" name="Nom" data-name="Nom"
-                                            id="Nom" class="w-input"></div>
+                                        class="div-block-108">
+                                        <label for="Nom" id="contact-email">Départ *</label>
+                                        <input
+                                                 value=0 type="text" maxlength="256" name="Nom" data-name="Nom"
+                                            id="Nom" class="w-input">
+                                        </div>
                                     <div id="w-node-_7c4238ec-34a1-2227-0577-fe461f0323bc-edc993e5"><label for="Prenom"
-                                            id="contact-phone">Destination *</label><input readonly value=0 type="text"
+                                            id="contact-phone">Destination *</label><input  value=0 type="text"
                                             class="w-input" maxlength="256" name="Prenom" data-name="Prenom"
                                             id="Prenom"></div>
                                     <div id="w-node-_7c4238ec-34a1-2227-0577-fe461f0323c4-edc993e5"><label for="Phone"
@@ -166,11 +172,11 @@
                     <div class="form-field-wrapper">
                         <div id="w-node-_37a26054-c4d5-4a7f-d04b-1b2af1a93564-edc993e5" class="form-break"></div>
                         <div id="w-node-_41952306-0171-42c3-b728-4c434ee8c51d-edc993e5"><label for="Nom-7"
-                                id="contact-email">Prix hors taxe</label><input readonly value=0 type="text" maxlength="256" name="Nom-6"
-                                data-name="Nom 6" id="Nom-6" class="w-input"></div>
+                                id="contact-email">Prix hors taxe</label><input readonly value=0 type="text"
+                                maxlength="256" name="Nom-6" data-name="Nom 6" id="Nom-6" class="w-input"></div>
                         <div id="w-node-_4b93cfca-c4d9-2880-73ac-031748dcb593-edc993e5"><label for="Nom-7"
-                                id="contact-email">Frais de service</label><input readonly value=0 type="text" maxlength="256"
-                                name="Nom-6" data-name="Nom 6" id="Nom-6" class="w-input"></div><label
+                                id="contact-email">Frais de service</label><input readonly value=0 type="text"
+                                maxlength="256" name="Nom-6" data-name="Nom 6" id="Nom-6" class="w-input"></div><label
                             id="w-node-_4c0ae8c9-2f35-4774-535a-6adeba3490d6-edc993e5"
                             class="w-checkbox checkbox-field-3"><input type="checkbox" id="CheckColis-2"
                                 name="CheckColis-2" data-name="Check Colis 2" class="w-checkbox-input"><span
@@ -180,12 +186,12 @@
                                 id="contact-phone">Souscrire à une police d&#x27;assurance</label><input type="number"
                                 class="w-input" maxlength="256" name="Phone-3" data-name="Phone 3" id="Phone-3"></div>
                         <div id="w-node-_93640ef7-7545-1dff-b2e6-d8a040308137-edc993e5"><label for="Phone-5"
-                                id="contact-phone">Prix de l&#x27;assurance</label><input readonly value=0 type="number" class="w-input"
-                                maxlength="256" name="Phone-3" data-name="Phone 3" id="Phone-3"></div>
+                                id="contact-phone">Prix de l&#x27;assurance</label><input readonly value=0 type="number"
+                                class="w-input" maxlength="256" name="Phone-3" data-name="Phone 3" id="Phone-3"></div>
                         <div id="w-node-_2686b1cd-9350-9c89-1c8b-bf8b78e3e95b-edc993e5" class="form-break"></div>
                         <div id="w-node-_52c0d420-680c-18b5-58e9-ebbbb3780d12-edc993e5"><label for="Nom-7"
-                                id="contact-email">Prix total TTC à payer</label><input readonly value=0 type="text" maxlength="256"
-                                name="Nom-6" data-name="Nom 6" id="Nom-6" class="w-input"></div>
+                                id="contact-email">Prix total TTC à payer</label><input readonly value=0 type="text"
+                                maxlength="256" name="Nom-6" data-name="Nom 6" id="Nom-6" class="w-input"></div>
                     </div><label class="w-checkbox"><input type="checkbox" id="CheckColis-2" name="has_condition"
                             data-name="Check Colis 2" class="w-checkbox-input"><span for="CheckColis-3"
                             class="w-form-label">J&#x27;accepte les conditions générales et la politique de
