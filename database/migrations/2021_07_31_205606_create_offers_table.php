@@ -23,24 +23,22 @@ class CreateOffersTable extends Migration
             $table->foreignId("trajet_id")->nullable();
 
             $table->string("code")->nullable();
-            $table->string("currency")->notNull()->defaultValue("EUR");
-            $table->double("ratio_eur")->notNull()->defaultValue(1);
+            $table->string("currency")->nullable()->defaultValue("EUR");
+            $table->double("ratio_eur")->nullable()->defaultValue(1);
 
-            $table->boolean("has_colis")->notNull()->defaultValue(false);
-            $table->double("colis_unit_cost")->defaultValue(0);
-            $table->double("colis_quantity")->notNull()->defaultValue(0);
-            $table->double("colis_ttc")->defaultValue(0);
+            $table->string("has_colis")->nullable();
+            $table->double("colis_unit_cost")->nullable()->defaultValue(0);
+            $table->double("colis_quantity")->nullable()->defaultValue(0);
+            $table->double("colis_ttc")->nullable();
 
-            $table->boolean("has_courrier")->notNull()->defaultValue(false);
-            $table->double("courrier_unit_cost")->defaultValue(0);
-            $table->double("courrier_quantity")->notNull()->defaultValue(0);
-            $table->double("courrier_ttc")->notNull()->defaultValue(0);
+            $table->string("has_courrier")->nullable();
+            $table->double("courrier_unit_cost")->nullable();
+            $table->double("courrier_quantity")->nullable()->defaultValue(0);
+            $table->double("courrier_ttc")->nullable()->defaultValue(0);
 
-
-            $table->enum("status", ['EN COURS', 'TERMINE','SUSPENDU']);
+            $table->enum("status", ['EN COURS', 'TERMINE','SUSPENDU'])->nullable();
             $table->text("delivery_condition")->nullable();
-            $table->text("delivery_address");
-
+            $table->text("delivery_address")->nullable();
             $table->timestamp("published_at");
             $table->timestamps();
 
