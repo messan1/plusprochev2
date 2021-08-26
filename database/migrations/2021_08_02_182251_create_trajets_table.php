@@ -23,7 +23,6 @@ class CreateTrajetsTable extends Migration
             $table->timestamp("arrived_at")->nullable($value = false);
             $table->timestamps();
         });
-
     }
 
     /**

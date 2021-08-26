@@ -34,7 +34,7 @@ class offerController extends Controller
 
     public function store(Request $request){
         if(!isset($request['has_courrier']) && !isset($request['has_colis'])){
-            $sms = "Vous navez pas cochez"; 
+            $sms = "Vous Devez choisir au moins une option ( Colis ou Courrier)"; 
                     return view('pages.PublishOffer')->with('error',$sms);
         }else{
             $request->validate([
@@ -42,8 +42,13 @@ class offerController extends Controller
                 "destination" => "required",
                 "arrived_at" => "required",
                 "delivery_address" => "required",
-
+                "plane_ticket" => "required",
             ]);
+            $image = $request->file('plane_ticket');
+            $destinationPath = 'plane_ticket/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+
             $dataTrajet = [
                 "depart"=> $request['depart'],
                 "destination"=> $request['destination'],
@@ -53,30 +58,46 @@ class offerController extends Controller
             $trajet = trajet::create($dataTrajet);
 
             $dataOffer = [
+                
                 "delivery_address"=> $request['delivery_address'],
+                'delivery_condition' => $request['delivery_condition'],
+                "trajet_id"=>$trajet->id,
+                "user_id"=>Auth::user()->id,
+                "currency"=>"EUR",
+                "ratio_eur",
                 ];
             if($request['has_colis']=='on'){
                 $validated = $request->validate([
                     "colis_quantity" => "required",
+                    "colis_ttc" => "required",
                     "colis_unit_cost" => "required",
                     "delivery_condition" => "required",
                 ]);
-
+                $dataOffer['has_colis']=$request['has_colis'];
+                $dataOffer['colis_ttc']=$request['colis_unit_cost'];
                 $dataOffer['colis_quantity'] = $request['colis_quantity'];
                 $dataOffer['colis_unit_cost'] = $request['colis_unit_cost'];
-                $dataOffer['delivery_condition'] = $request['delivery_condition'];
+            }else{
+                $dataOffer['has_colis']='off';
             };
             if($request['has_courrier']=='on'){
                 $request->validate([
                     "courrier_quantity" => "required",
                     "courrier_unit_cost" => "required",
+                    "courrier_ttc" => "required",
+
                 ]);
-                $offer->courrier_quantity = $request['courrier_quantity'];
-                $offer->courrier_unit_cost = $request['courrier_unit_cost'];
+                $dataOffer['has_courrier']=$request['has_courrier'];
+                $dataOffer['courrier_quantity'] = $request['courrier_quantity'];
+                $dataOffer['courrier_unit_cost'] = $request['courrier_unit_cost'];
+                $dataOffer['courrier_ttc'] = $request['courrier_ttc'];
 
             }
-            Offer::create($data);
-            
+            $offer = Offer::create($dataOffer);
+            $dataTosend = Offer::all();
+        return redirect()->route('offers.index')
+        ->with('success', 'Votre offre à été rajoutée.')
+        ->with('data',$dataTosend);
         }
     }
     public function oldstore(Request $request)
@@ -188,14 +209,9 @@ class offerController extends Controller
             $offer->save();
         }
 
-
-
-
-
-
-
         return redirect()->route('offers.index')
-            ->with('success', 'Votre offre à été rajoutée.');
+            ->with('success', 'Votre offre à été rajoutée.')
+            ->with('data',$dataTosend);
     }
 
 

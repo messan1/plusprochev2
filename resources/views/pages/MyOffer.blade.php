@@ -24,6 +24,7 @@
         </div>
       </div>
     </div>
+    {{ dd($success)}}
     <div class="w-layout-grid grid-2">
       <div class="creator_block">
         <div class="columns-14 offer-encours w-row">

@@ -12,8 +12,10 @@ class Offer extends Model
     protected $table = 'offers';
     protected $primaryKey = 'id';
     protected $fillable = [
-        "currency", "has_colis", "colis_unit_cost", "colis_quantity", "has_courrier",
-        "delivery_condition", "delivery_address"
+
+        "user_id", "trajet_id", "code","currency", "ratio_eur", "has_colis", "colis_unit_cost", "has_courrier", "colis_quantity",
+        "colis_ttc", "has_courrier", "courrier_unit_cost","delivery_condition", "courrier_quantity",
+        "delivery_address","courrier_ttc", "status", "delivery_address"
     ];
 
     public function user(){
